@@ -44,6 +44,8 @@ class Led_controller(threading.Thread):
                     led_off(self.pin)
                     time.sleep(SLEEP_INTERVAL)
                 self.is_updated = False
+            else:
+                break
 
 
 ########### Functions ############
@@ -76,9 +78,21 @@ def led_off(pin):
     os.system("gpioctl " + pin + " 0")
 
 
+# Clean up at exit
+def clean_up():
+    for key, value in JOBS.iteritems():
+        value["thread"].status = ""
+        value["thread"].is_updated = True
+    time.sleep(SLEEP_INTERVAL + 1)
+
+
 # Main
 if __name__ == "__main__":
     init()
-    while True:
-        update_build_info()
-        time.sleep(UPDATE_INTERVAL)
+    try:
+        while True:
+            update_build_info()
+            time.sleep(UPDATE_INTERVAL)
+    finally:
+        print "Cleaning up, please wait..."
+        clean_up()
