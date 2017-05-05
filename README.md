@@ -1,7 +1,13 @@
-install virtualenv
-activate venv: source venv/bin/activate
+# freebsd-ci-led
+An LED penal indicating the FreeBSD Jenkins CI build status, backed by FreeBSD on an IoT device.  
 
-first time: sudo pip -r requirements.txt
+## Requirements:
+A BeagleBone Green running FreeBSD 12.0-CURRENT and python 2.7  
+GPIO connection to LEDs at /dev/gpioc0 
 
-#TODO:
+## TODO:
+- Ability to set GPIO device location
+- External config file
+- Better Logging
+- Exiting clean_up()
 - Update Docs
