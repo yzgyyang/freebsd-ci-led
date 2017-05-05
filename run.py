@@ -8,8 +8,12 @@ import threading
 # Config
 JENKINS_URL = "https://ci.freebsd.org/api/python"
 UPDATE_INTERVAL = 10
+QUICK_INTERVAL = 0.5
+SLOW_INTERVAL = 1.5
+SLEEP_INTERVAL = 2
 JOBS = {
-    "FreeBSD-head-aarch64-build": {"pin": "11"}
+    "FreeBSD-head-aarch64-build": {"pin": "11"},
+    "FreeBSD-head-amd64-images": {"pin": "10"}
 }
 
 
@@ -24,17 +28,21 @@ class Led_controller(threading.Thread):
 
     def run(self):
         while True:
-            if self.status == "blue_anime":
+            if self.status == "blue":
                 while self.is_updated == False:
                     led_on(self.pin)
-                    time.sleep(0.5)
+                    time.sleep(SLEEP_INTERVAL)
+            elif self.status == "blue_anime":
+                while self.is_updated == False:
+                    led_on(self.pin)
+                    time.sleep(QUICK_INTERVAL)
                     led_off(self.pin)
-                    time.sleep(0.5)
+                    time.sleep(QUICK_INTERVAL)
                 self.is_updated = False
             elif self.status == "undefined":
                 while self.is_updated == False:
                     led_off(self.pin)
-                    time.sleep(2)
+                    time.sleep(SLEEP_INTERVAL)
                 self.is_updated = False
 
 
