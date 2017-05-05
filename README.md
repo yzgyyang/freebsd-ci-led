@@ -1,5 +1,5 @@
 # freebsd-ci-led
-An LED penal indicating the FreeBSD Jenkins CI build status, backed by FreeBSD on an IoT device.  
+An LED panel indicating the FreeBSD Jenkins CI build status, backed by FreeBSD on an IoT device.  
 
 ## Requirements:
 A BeagleBone Green running FreeBSD 12.0-CURRENT and python 2.7  
