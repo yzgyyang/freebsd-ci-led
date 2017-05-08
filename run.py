@@ -61,8 +61,9 @@ def update_build_info():
     for key, value in JOBS.iteritems():
         for item in data:
             if item["name"] == key:
-                value["thread"].status = item["color"]
-                value["thread"].is_updated = True
+                if value["thread"].status != item["color"]:
+                    value["thread"].status = item["color"]
+                    value["thread"].is_updated = True
                 break
 
 
