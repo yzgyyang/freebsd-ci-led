@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 import ast
 import urllib
 import threading
@@ -38,14 +39,21 @@ class Led_controller(threading.Thread):
                     time.sleep(QUICK_INTERVAL)
                     led_off(self.pin)
                     time.sleep(QUICK_INTERVAL)
+                self.log(self)
                 self.is_updated = False
             elif self.status == "undefined":
                 while self.is_updated == False:
                     led_off(self.pin)
                     time.sleep(SLEEP_INTERVAL)
+                self.log(self)
                 self.is_updated = False
             else:
                 break
+
+    def log(self):
+        msg = "[" + str(datetime.datetime.now()) + "] "
+        msg += self.name + " changed status to " + self.status
+        print msg
 
 
 ########### Functions ############
@@ -92,6 +100,7 @@ if __name__ == "__main__":
     try:
         while True:
             update_build_info()
+            print "[" + str(datetime.datetime.now()) + "] Build info has been updated."
             time.sleep(UPDATE_INTERVAL)
     finally:
         print "Cleaning up, please wait..."
