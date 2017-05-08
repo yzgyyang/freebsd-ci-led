@@ -76,7 +76,7 @@ def init():
         value["thread"] = Led_controller(key, value["pin"], "undefined", False)
         value["thread"].start()
         print "[" + str(datetime.datetime.now()) + "] Thread " + key\
-              + " created at PIN " + value.pin + "."     
+              + " created at PIN " + value["pin"] + "."     
 
 
 # Led on
