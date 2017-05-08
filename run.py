@@ -14,7 +14,9 @@ SLOW_INTERVAL = 1.5
 SLEEP_INTERVAL = 2
 JOBS = {
     "FreeBSD-head-aarch64-build": {"pin": "11"},
-    "FreeBSD-head-amd64-images": {"pin": "10"}
+    "FreeBSD-head-amd64-build": {"pin": "10"},
+    "FreeBSD-head-i386-build": {"pin": "5"},
+    "FreeBSD-head-riscv64-build": {"pin": "20"}
 }
 
 
@@ -73,7 +75,8 @@ def init():
         os.system("gpioctl -c " + value["pin"] + " OUT")
         value["thread"] = Led_controller(key, value["pin"], "undefined", False)
         value["thread"].start()
-        print "[" + str(datetime.datetime.now()) + "] Thread " + key + " created."     
+        print "[" + str(datetime.datetime.now()) + "] Thread " + key 
+              + " created at PIN " + value.pin + "."     
 
 
 # Led on
@@ -100,7 +103,7 @@ if __name__ == "__main__":
     try:
         while True:
             update_build_info()
-            print "[" + str(datetime.datetime.now()) + "] Build info has been updated."
+            # print "[" + str(datetime.datetime.now()) + "] Build info has been updated."
             time.sleep(UPDATE_INTERVAL)
     finally:
         print "Cleaning up, please wait..."
