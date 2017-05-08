@@ -39,20 +39,18 @@ class Led_controller(threading.Thread):
                     time.sleep(QUICK_INTERVAL)
                     led_off(self.pin)
                     time.sleep(QUICK_INTERVAL)
-                self.log()
-                self.is_updated = False
             elif self.status == "undefined":
                 while self.is_updated == False:
                     led_off(self.pin)
                     time.sleep(SLEEP_INTERVAL)
-                self.log()
-                self.is_updated = False
             else:
                 break
+            self.log()
+            self.is_updated = False
 
     def log(self):
         msg = "[" + str(datetime.datetime.now()) + "] "
-        msg += self.name + " changed status to " + self.status
+        msg += self.name + " changed status to " + self.status + "."
         print msg
 
 
