@@ -16,7 +16,7 @@ JOBS = {
     "FreeBSD-head-aarch64-build": {"pin": "11"},
     "FreeBSD-head-amd64-build": {"pin": "10"},
     "FreeBSD-head-i386-build": {"pin": "5"},
-    "FreeBSD-head-riscv64-build": {"pin": "20"}
+    "FreeBSD-head-riscv64-build": {"pin": "8"}
 }
 
 
