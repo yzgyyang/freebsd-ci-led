@@ -29,17 +29,17 @@ class Led_controller(threading.Thread):
 
     def run(self):
         while True:
-            if self.status == "blue":
+            if self.status == "red":
                 while self.is_updated == False:
                     led_on(self.pin)
                     time.sleep(SLEEP_INTERVAL)
-            elif self.status == "blue_anime":
+            elif self.status in ["blue_anime", "red_anime"]:
                 while self.is_updated == False:
                     led_on(self.pin)
                     time.sleep(QUICK_INTERVAL)
                     led_off(self.pin)
                     time.sleep(QUICK_INTERVAL)
-            elif self.status == "undefined":
+            elif self.status in ["blue", "undefined"]:
                 while self.is_updated == False:
                     led_off(self.pin)
                     time.sleep(SLEEP_INTERVAL)
