@@ -39,13 +39,13 @@ class Led_controller(threading.Thread):
                     time.sleep(QUICK_INTERVAL)
                     led_off(self.pin)
                     time.sleep(QUICK_INTERVAL)
-                self.log(self)
+                self.log()
                 self.is_updated = False
             elif self.status == "undefined":
                 while self.is_updated == False:
                     led_off(self.pin)
                     time.sleep(SLEEP_INTERVAL)
-                self.log(self)
+                self.log()
                 self.is_updated = False
             else:
                 break
@@ -74,6 +74,7 @@ def init():
         os.system("gpioctl -c " + value["pin"] + " OUT")
         value["thread"] = Led_controller(key, value["pin"], "undefined", False)
         value["thread"].start()
+        print "[" + str(datetime.datetime.now()) + "] Thread " + key + " created."     
 
 
 # Led on
