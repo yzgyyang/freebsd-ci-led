@@ -5,6 +5,8 @@ import ast
 import urllib
 import threading
 
+import led_on, led_off, pin_out from freebsd-gpio
+
 
 # Config
 JENKINS_URL = "https://ci.freebsd.org/api/python"
@@ -72,21 +74,11 @@ def update_build_info():
 # Init LEDs and corresponding threads
 def init():
     for key, value in JOBS.iteritems():
-        os.system("gpioctl -c " + value["pin"] + " OUT")
+        pin_out(value["pin"])
         value["thread"] = Led_controller(key, value["pin"], "undefined", False)
         value["thread"].start()
         print "[" + str(datetime.datetime.now()) + "] Thread " + key\
               + " created at PIN " + value["pin"] + "."     
-
-
-# Led on
-def led_on(pin):
-    os.system("gpioctl " + pin + " 1")
-
-
-# Led off
-def led_off(pin):
-    os.system("gpioctl " + pin + " 0")
 
 
 # Clean up at exit
