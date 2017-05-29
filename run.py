@@ -5,7 +5,7 @@ import ast
 import urllib
 import threading
 
-import led_on, led_off, pin_out from freebsd-gpio
+from freebsd-gpio import set_gpio_value, set_gpio_direction
 
 
 # Config
@@ -35,17 +35,17 @@ class Led_controller(threading.Thread):
         while True:
             if self.status == "red":
                 while self.is_updated == False:
-                    led_on(self.pin)
+                    set_gpio_value(self.pin, 1)
                     time.sleep(SLEEP_INTERVAL)
             elif self.status in ["blue_anime", "red_anime"]:
                 while self.is_updated == False:
-                    led_on(self.pin)
+                    set_gpio_value(self.pin, 1)
                     time.sleep(QUICK_INTERVAL)
-                    led_off(self.pin)
+                    set_gpio_value(self.pin, 0)
                     time.sleep(QUICK_INTERVAL)
             elif self.status in ["blue", "undefined"]:
                 while self.is_updated == False:
-                    led_off(self.pin)
+                    set_gpio_value(self.pin, 0)
                     time.sleep(SLEEP_INTERVAL)
             else:
                 break
